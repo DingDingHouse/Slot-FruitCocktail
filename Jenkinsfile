@@ -54,7 +54,7 @@ pipeline {
                         hostname
                         git stash -u
                         git checkout main
-                        git rm -r -f Builds
+                        git rm -r -f Build
                         git rm -f index.html
                         git commit -m "delete old Builds" || echo "Nothing to commit"
                         git push origin main
