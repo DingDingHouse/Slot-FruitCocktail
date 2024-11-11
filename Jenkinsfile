@@ -1,6 +1,6 @@
 def PROJECT_NAME = "Slot-FruitCocktail"
-def UNITY_VERSION = "2022.3.51f1"
-def UNITY_INSTALLATION = "C:\\Program Files\\Unity\\Hub\\Editor\\${UNITY_VERSION}\\Editor\\Unity.exe"
+def UNITY_VERSION = "2022.3.23f1"
+def UNITY_INSTALLATION = "/home/ubuntu/Editor/Unity"
 def REPO_URL = "git@github.com:DingDingHouse/Slot-FruitCocktail.git"
 
 pipeline {
@@ -11,25 +11,25 @@ pipeline {
     }
 
     environment {
-        PROJECT_PATH = "C:\\Games\\Slot-FruitCocktail"
+        PROJECT_PATH = "/home/ubuntu/Games/Slot-FruitCocktail"
     }
 
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    dir("${PROJECT_PATH}") {
-                        bat '''
-                        git config --global http.postBuffer 3221225472
-                        git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git C:\\Games\\Slot-FruitCocktail || echo "Repository already exists, pulling latest changes."
-                        cd Slot-FruitCocktail
-                        git checkout main
-                        git fetch --all
-                        git reset --hard origin/develop
-                        git reset --hard origin/main
-                        git checkout develop
-                        '''
-                    }
+                    sh '''
+                    whoami
+
+                    if [ ! -d "$PROJECT_PATH" ]; then
+                        git clone $REPO_URL $PROJECT_PATH
+                    else
+                        echo "Repository already exists, pulling latest changes."
+                    fi
+                    cd $PROJECT_PATH
+                    git pull origin develop
+                    git reset --hard origin/develop
+                    '''
                 }
             }
         }
@@ -37,11 +37,9 @@ pipeline {
         stage('Build WebGL') {
             steps {
                 script {
-                    withEnv(["UNITY_PATH=${UNITY_INSTALLATION}"]) {
-                        bat '''
-                        "%UNITY_PATH%" -quit -batchmode -projectPath "%PROJECT_PATH%" -executeMethod BuildScript.BuildWebGL -logFile -
-                        '''
-                    }
+                    sh '''
+                    ${UNITY_INSTALLATION} -quit -batchmode -nographics -projectPath ${PROJECT_PATH} -executeMethod MyBuilder.WebGLBuilder.Build -logFile ${PROJECT_PATH}/build.log
+                    '''
                 }
             }
         }
@@ -50,10 +48,10 @@ pipeline {
             steps {
                 script {
                     dir("${PROJECT_PATH}") {
-                        bat '''
-                        hostname
+                        sh '''
                         git stash -u
                         git checkout main
+                        git rm -r -f Builds
                         git rm -r -f Build
                         git rm -f index.html
                         git commit -m "delete old Builds" || echo "Nothing to commit"
@@ -61,10 +59,9 @@ pipeline {
 
                         git checkout main
                         git checkout develop -- Builds
-                        robocopy Builds\\WebGL\\ .\\ /move /e /copyall
-                        git rm -r -f Builds
+                        rsync -a --remove-source-files Builds/WebGL/ ./
                         git add -f Build index.html
-                        git commit -m "adding new Builds" || echo "Nothing to commit"
+                        git commit -m "adding new Builds from Linux" || echo "Nothing to commit"
                         git push origin main
                         git checkout develop
                         git pull origin develop
