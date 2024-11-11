@@ -24,6 +24,8 @@ pipeline {
                     else
                         echo "Repository already exists, pulling latest changes."
                         cd $PROJECT_PATH
+                        git config --global user.name "Pratham"
+                        git config --global user.email "prathamesh@inserpinservices.com"
                         git config --global --add safe.directory /var/lib/jenkins/workspace/FruitCocktail
                         git fetch --all
                         git reset --hard origin/develop
