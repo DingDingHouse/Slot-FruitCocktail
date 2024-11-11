@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    sudo -u ubuntu /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath ${PROJECT_PATH} -executeMethod MyBuilder.WebGLBuilder.Build -logFile
+                    echo "1234" | sudo -S -u ubuntu /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath ${PROJECT_PATH} -executeMethod MyBuilder.WebGLBuilder.Build -logFile
                     '''
                 }
             }
