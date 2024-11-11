@@ -10,7 +10,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "1234" | sudo -S -u ubuntu bash -c "
                     whoami
                     git config pull.rebase false
                     if [ ! -d \"$PROJECT_PATH\" ]; then
@@ -63,7 +62,6 @@ pipeline {
                         git push origin main
                         git checkout develop
                         git pull origin develop
-                        "
                         '''
                     }
                 }
