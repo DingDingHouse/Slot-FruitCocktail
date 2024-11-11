@@ -41,7 +41,8 @@ pipeline {
                 script {
                     sh '''
                     echo "1234" | sudo -S -u ubuntu bash -c "
-                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /home/ubuntu/Games/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build -logFile
+                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /home/ubuntu/Games/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build
+                    "
                     '''
                 }
             }
@@ -63,7 +64,7 @@ pipeline {
 
                         git checkout main
                         git checkout develop -- Builds
-                        rsync -a --remove-source-files Builds/WebGL/ ./
+                        rsync -a --remove-source-files Builds/WebGL/ ./ 
                         git add -f Build index.html
                         git commit -m 'adding new Builds from Linux' || echo 'Nothing to commit'
                         git push origin main
