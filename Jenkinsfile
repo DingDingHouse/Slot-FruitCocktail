@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PROJECT_PATH = "/home/ubuntu/Games/Slot-FruitCocktail"
+    }
+
     options {
         timeout(time: 60, unit: 'MINUTES')
     }
@@ -15,19 +19,18 @@ pipeline {
 
                     # Check if the project directory exists
                     if [ ! -d "$PROJECT_PATH" ]; then
-                    echo "Cloning repository..."
-                    git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git $PROJECT_PATH
-                else
-                    echo "Repository already exists, pulling latest changes."
-                    cd $PROJECT_PATH
-                    git fetch --all
-                    git reset --hard origin/develop
+                        echo "Cloning repository..."
+                        git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git $PROJECT_PATH
+                    else
+                        echo "Repository already exists, pulling latest changes."
+                        cd $PROJECT_PATH
+                        git fetch --all
+                        git reset --hard origin/develop
                     fi
 
                     cd $PROJECT_PATH
                     git config pull.rebase false
                     git config pull.rebase true
-                    "
                     '''
                 }
             }
@@ -67,6 +70,7 @@ pipeline {
                         git push origin main
                         git checkout develop
                         git pull origin develop
+                        "
                         '''
                     }
                 }
