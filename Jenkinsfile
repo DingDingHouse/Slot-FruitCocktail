@@ -19,7 +19,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    sudo -i
                     whoami
 
                     if [ ! -d "$PROJECT_PATH" ]; then
