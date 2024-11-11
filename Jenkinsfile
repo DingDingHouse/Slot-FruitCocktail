@@ -30,7 +30,7 @@ pipeline {
                     cd $PROJECT_PATH
                     git config pull.rebase false
                     git config pull.rebase true 
-                    git pull origin develop
+                    git fetch --all
                     git reset --hard origin/develop
                     '''
                 }
