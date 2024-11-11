@@ -19,10 +19,11 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    sudo -i
                     whoami
 
                     if [ ! -d "$PROJECT_PATH" ]; then
-                        git clone $REPO_URL /home/ubuntu/Games/
+                        git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git /home/ubuntu/Games/Slot-FruitCocktail
                     else
                         echo "Repository already exists, pulling latest changes."
                     fi
