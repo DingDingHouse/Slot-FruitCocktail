@@ -24,6 +24,7 @@ pipeline {
                     else
                         echo "Repository already exists, pulling latest changes."
                         cd $PROJECT_PATH
+                        git config --global --add safe.directory /home/ubuntu/Games/Slot-FruitCocktail
                         git fetch --all
                         git reset --hard origin/develop
                     fi
