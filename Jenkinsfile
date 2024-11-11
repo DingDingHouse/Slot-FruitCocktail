@@ -12,16 +12,21 @@ pipeline {
                     sh '''
                     whoami
                     git config pull.rebase false
-                    if [ ! -d \"$PROJECT_PATH\" ]; then
-                        git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git /home/ubuntu/Games/Slot-FruitCocktail
-                    else
-                        echo \"Repository already exists, pulling latest changes.\"
+
+                    # Check if the project directory exists
+                    if [ ! -d "$PROJECT_PATH" ]; then
+                    echo "Cloning repository..."
+                    git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git $PROJECT_PATH
+                else
+                    echo "Repository already exists, pulling latest changes."
+                    cd $PROJECT_PATH
+                    git fetch --all
+                    git reset --hard origin/develop
                     fi
+
                     cd $PROJECT_PATH
                     git config pull.rebase false
                     git config pull.rebase true
-                    git fetch --all
-                    git reset --hard origin/develop
                     "
                     '''
                 }
