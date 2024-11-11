@@ -58,6 +58,7 @@ pipeline {
                     dir("${PROJECT_PATH}") {
                         sh '''
                         echo "1234" | sudo -S -u ubuntu bash -c "
+                        git config --global --add safe.directory /var/lib/jenkins/workspace/FruitCocktail
                         git stash -u
                         git checkout main
                         git rm -r -f Builds
