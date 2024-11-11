@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath ${PROJECT_PATH} -executeMethod MyBuilder.WebGLBuilder.Build -logFile ${PROJECT_PATH}/build.log
+                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath ${PROJECT_PATH} -executeMethod MyBuilder.WebGLBuilder.Build -logFile
                     '''
                 }
             }
