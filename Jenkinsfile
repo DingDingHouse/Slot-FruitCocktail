@@ -19,18 +19,17 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    if [ -d "$PROJECT_PATH/.git" ]; then
-                        echo "Repository already exists, pulling latest changes."
-                        cd $PROJECT_PATH
-                        git fetch origin
-                        git reset --hard origin/develop
+                    sudo -i
+                    whoami
+
+                    if [ ! -d "$PROJECT_PATH" ]; then
+                        git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git /home/ubuntu/Games/Slot-FruitCocktail
                     else
-                        echo "Cloning the repository..."
-                        rm -rf $PROJECT_PATH  # Clean up if the directory is present without a .git folder
-                        git clone $REPO_URL $PROJECT_PATH
-                        cd $PROJECT_PATH
-                        git checkout develop
+                        echo "Repository already exists, pulling latest changes."
                     fi
+                    cd $PROJECT_PATH
+                    git pull origin develop
+                    git reset --hard origin/develop
                     '''
                 }
             }
