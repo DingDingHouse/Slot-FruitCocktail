@@ -22,7 +22,7 @@ pipeline {
                     whoami
 
                     if [ ! -d "$PROJECT_PATH" ]; then
-                        git clone $REPO_URL $PROJECT_PATH
+                        git clone $REPO_URL /home/ubuntu/Games/
                     else
                         echo "Repository already exists, pulling latest changes."
                     fi
