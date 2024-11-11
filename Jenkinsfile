@@ -20,6 +20,7 @@ pipeline {
                 script {
                     sh '''
                     whoami
+                    git config pull.rebase false
 
                     if [ ! -d "$PROJECT_PATH" ]; then
                         git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git /home/ubuntu/Games/Slot-FruitCocktail
