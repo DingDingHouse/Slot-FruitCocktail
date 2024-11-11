@@ -32,6 +32,7 @@ pipeline {
                     cd $PROJECT_PATH
                     git config pull.rebase false
                     git config pull.rebase true
+                    git checkout develop
                     '''
                 }
             }
