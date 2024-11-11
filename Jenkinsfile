@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_PATH = "/home/ubuntu/Games/Slot-FruitCocktail"
+        PROJECT_PATH = "/var/lib/jenkins/workspace/FruitCocktail"
     }
 
     options {
@@ -24,7 +24,7 @@ pipeline {
                     else
                         echo "Repository already exists, pulling latest changes."
                         cd $PROJECT_PATH
-                        git config --global --add safe.directory /home/ubuntu/Games/Slot-FruitCocktail
+                        git config --global --add safe.directory /var/lib/jenkins/workspace/FruitCocktail
                         git fetch --all
                         git reset --hard origin/develop
                     fi
