@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "1234" | sudo -S -u ubuntu
+                    echo "1234" | su - ubuntu
                     whoami
                     git config pull.rebase false
 
