@@ -41,8 +41,7 @@ pipeline {
                 script {
                     sh '''
                     echo "1234" | sudo -S -u ubuntu bash -c "
-                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /home/ubuntu/Games/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build -logFile /home/ubuntu/Games/Slot-FruitCocktail/build.log
-                    "
+                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /home/ubuntu/Games/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build -logFile
                     '''
                 }
             }
