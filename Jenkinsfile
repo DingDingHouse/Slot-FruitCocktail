@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_PATH = "/var/lib/jenkins/workspace/FruitCocktail"
+        PROJECT_PATH = "/var/jenkins_home/Slot-FruitCocktail"
     }
 
     options {
