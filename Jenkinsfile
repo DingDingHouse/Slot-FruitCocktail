@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_PATH = "/var/lib/jenkins/workspace/FruitCocktail"
+        PROJECT_PATH = "/root/ubuntu/Slot-FruitCocktail"
     }
 
     options {
@@ -15,21 +15,7 @@ pipeline {
                 script {
                     sh '''
                     whoami
-                    git config pull.rebase false
-
-                    # Check if the project directory exists
-                    if [ ! -d "$PROJECT_PATH" ]; then
-                        echo "Cloning repository..."
-                        git clone git@github.com:DingDingHouse/Slot-FruitCocktail.git $PROJECT_PATH
-                    else
-                        echo "Repository already exists, pulling latest changes."
-                        cd $PROJECT_PATH
-                        git config --global user.name "Pratham"
-                        git config --global user.email "prathamesh@inserpinservices.com"
-                        git config --global --add safe.directory /var/lib/jenkins/workspace/FruitCocktail
-                        git fetch --all
-                        git reset --hard origin/develop
-                    fi
+                    git clone -b develop git@github.com:DingDingHouse/Slot-FruitCocktail.git /root/ubuntu/
 
                     cd $PROJECT_PATH
                     git config pull.rebase false
