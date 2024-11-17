@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_PATH = "/root/ubuntu/Slot-FruitCocktail"
+        PROJECT_PATH = "/var/lib/jenkins/workspace/FruitCocktail"
     }
 
     options {
@@ -15,7 +15,7 @@ pipeline {
                 script {
                     sh '''
                     whoami
-                    git clone -b develop git@github.com:DingDingHouse/Slot-FruitCocktail.git /root/ubuntu/
+                    git clone -b develop https://github.com/DingDingHouse/Slot-FruitCocktail.git /var/lib/jenkins/workspace/FruitCocktail
 
                     cd $PROJECT_PATH
                     git config pull.rebase false
