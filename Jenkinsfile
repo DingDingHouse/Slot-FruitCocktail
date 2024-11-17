@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /var/lib/jenkins/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build -logfile
+                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /var/jenkins_home/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build -logfile
                     '''
                 }
             }
