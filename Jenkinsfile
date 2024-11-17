@@ -30,9 +30,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "1234" | sudo -S -u ubuntu bash -c "
-                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /var/lib/jenkins/workspace/FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build
-                    "
+                    /home/ubuntu/Editor/Unity -quit -batchmode -nographics -projectPath /var/lib/jenkins/Slot-FruitCocktail -executeMethod MyBuilder.WebGLBuilder.Build -logfile
                     '''
                 }
             }
