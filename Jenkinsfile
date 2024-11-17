@@ -15,7 +15,7 @@ pipeline {
                 script {
                     sh '''
                     whoami
-                    git clone -b develop https://github.com/DingDingHouse/Slot-FruitCocktail.git /var/lib/jenkins/workspace/FruitCocktail
+                    git clone -b develop https://github.com/DingDingHouse/Slot-FruitCocktail.git /var/jenkins_home/Slot-FruitCocktail
 
                     cd $PROJECT_PATH
                     git config pull.rebase false
